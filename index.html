@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web · Bots · Copy</title>
+<meta name="description" content="Portfolio: websites, Telegram bots and copywriting for crypto projects and small businesses.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 12-column bento of glass tiles. Hero + contact on top, then image tiles for sites, phone-chat tiles for bots, then writing samples. */
+:root{
+  color-scheme:dark;
+  --bg:#0d1013;
+  --card:rgba(25,29,35,.72);
+  --line:rgba(255,255,255,.08);
+  --fg:#ecebe6;
+  --muted:#9a9ea6;
+  --accent:#f0b35a;
+  --blue:#5b9bf0;
+  --ok:#6fd09a;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Hanken Grotesk',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);
+  background-image:radial-gradient(800px 480px at 85% -8%,rgba(240,179,90,.10),transparent 60%);
+  padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.page{max-width:1160px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.12;text-wrap:balance}
+a{color:inherit}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 0 20px}
+.brand{font-family:var(--display);font-weight:700;letter-spacing:.01em}
+.lang{display:flex;gap:4px;border:1px solid var(--line);border-radius:10px;padding:3px}
+.lang button{font:500 .75rem var(--mono);letter-spacing:.06em;color:var(--muted);background:transparent;border:0;border-radius:7px;padding:5px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#17120a}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.tile{
+  grid-column:span 12;position:relative;overflow:hidden;min-width:0;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.tile::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(240,179,90,.12),transparent 60%)}
+.tile:hover::after{opacity:1}
+.tile>*{position:relative;z-index:1}
+.label{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.sec{grid-column:span 12;margin:22px 0 2px;font:500 .78rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+.hero{display:flex;flex-direction:column;justify-content:flex-end;gap:16px;min-height:330px}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ok);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.hero h1{font-size:clamp(1.9rem,4.8vw,3.2rem);font-weight:700}
+.hero p{color:var(--muted);margin:0;max-width:52ch}
+.btn{align-self:flex-start;display:inline-block;background:var(--accent);color:#17120a;font-weight:600;text-decoration:none;border-radius:12px;padding:12px 22px}
+
+.contact{display:flex;flex-direction:column;gap:14px}
+.handle{font:500 1.35rem var(--mono);color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
+.contact p{margin:0;color:var(--muted);font-size:.95rem}
+.steps{display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.88rem;color:var(--muted)}
+.steps span{border:1px solid var(--line);border-radius:8px;padding:3px 9px}
+
+.shot{display:block;text-decoration:none}
+.tile.shot,#bfpTile .shot{display:flex;flex-direction:column}
+#bfpTile{display:flex;flex-direction:column}
+#bfpTile .shot{flex:1}
+.shot .img{flex:1 1 auto;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#12161b;border:1px solid var(--line)}
+.bot{display:flex;flex-direction:column}
+.bot .phone{flex:1}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s ease}
+.shot:hover img{transform:scale(1.025)}
+.cap{display:flex;flex-direction:column;gap:2px;padding-top:14px}
+.cap h3{font-size:1.15rem}
+.cap span{color:var(--muted);font-size:.9rem}
+.ph{display:grid;place-items:center;text-align:center;flex:1 1 auto;aspect-ratio:16/10;border-radius:12px;border:1px dashed var(--line);color:var(--muted);padding:16px;font-size:.9rem}
+
+.appshot{display:block;aspect-ratio:320/660;border-radius:16px;overflow:hidden;background:#0f1318;border:1px solid var(--line);max-width:200px;margin:0 auto}
+.appshot img{display:block;width:100%;height:100%;object-fit:cover}
+
+.phone{border:1px solid var(--line);border-radius:18px;background:#0f1318;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:300px}
+.phone .top{font:500 .78rem var(--mono);color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:2px}
+.m{max-width:86%;padding:8px 12px;border-radius:14px;font-size:.88rem;line-height:1.45;overflow-wrap:anywhere}
+.m.b{align-self:flex-start;background:#1c222b;border-bottom-left-radius:4px}
+.m.u{align-self:flex-end;background:var(--blue);color:#06101f;border-bottom-right-radius:4px}
+.kb{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-self:stretch}
+.kb i{font-style:normal;text-align:center;font-size:.8rem;border:1px solid var(--line);background:#161b22;border-radius:8px;padding:6px 4px}
+.kb i.wide{grid-column:span 2}
+.note{margin:12px 0 0;font-size:.78rem;color:var(--muted)}
+
+ul.list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+ul.list li{padding-left:18px;position:relative;color:var(--fg)}
+ul.list li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:2px;background:var(--accent)}
+
+.pair{display:grid;grid-template-columns:1fr;gap:12px}
+.q{margin:0;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:.95rem}
+.q small{display:block;font:500 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+footer{color:var(--muted);font-size:.82rem;text-align:center;padding-top:30px}
+
+@media(min-width:620px){
+  .pair{grid-template-columns:1fr 1fr}
+  .s6{grid-column:span 6}.s12{grid-column:span 12}
+}
+@media(min-width:960px){
+  .s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}
+  .hero{grid-column:span 8}.contact{grid-column:span 4}
+  .s3{grid-column:span 3}
+}
+@media(prefers-reduced-motion:reduce){.shot img,.tile::after{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav>
+    <div class="brand">Web · Bots · Copy</div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </nav>
+
+  <main class="bento">
+    <section class="tile hero">
+      <span class="chip" data-i="chip">Принимаю заказы</span>
+      <h1 data-i="h1">Сайты, боты и тексты для крипто-проектов и малого бизнеса</h1>
+      <p data-i="lead">Делаю быстро и по делу: от лендинга до Telegram-бота. Ниже примеры работ. Детали и цену обсудим в личных сообщениях.</p>
+      <a class="btn" id="cta" href="#" data-i="cta">Написать в Telegram</a>
+    </section>
+
+    <section class="tile contact" id="contact">
+      <div class="label" data-i="contact">Связь</div>
+      <a class="handle" id="handle" href="#">@your_telegram</a>
+      <p data-i="pay">Оплата: USDT, USDC или по договорённости.</p>
+      <div class="steps"><span data-i="s1">Бриф</span><span data-i="s2">Цена</span><span data-i="s3">Предоплата</span><span data-i="s4">Результат и правки</span></div>
+    </section>
+
+    <h2 class="sec" data-i="secWork">Сайты</h2>
+
+    <a class="tile shot s6" href="sites/vaultline.html">
+      <div class="img"><img src="images/vaultline.jpg" width="1280" height="800" alt="Vaultline: bento landing page for a crypto portfolio tracker" loading="lazy"></div>
+      <div class="cap"><h3>Vaultline</h3><span data-i="cVault">Концепт · лендинг крипто-трекера</span></div>
+    </a>
+    <a class="tile shot s6" href="sites/novaledger.html">
+      <div class="img"><img src="images/novaledger.jpg" width="1280" height="800" alt="NovaLedger: landing page for a self-custody wallet" loading="lazy"></div>
+      <div class="cap"><h3>NovaLedger</h3><span data-i="cNova">Концепт · лендинг кошелька</span></div>
+    </a>
+    <a class="tile shot s4" href="sites/nord-roast-cafe.html">
+      <div class="img"><img src="images/nordroast.jpg" width="1280" height="800" alt="Nord Roast: business-card website for a coffee shop" loading="lazy"></div>
+      <div class="cap"><h3>Nord Roast</h3><span data-i="cNord">Демо · сайт-визитка кофейни</span></div>
+    </a>
+    <a class="tile shot s4" href="sites/staking-calculator.html">
+      <div class="img"><img src="images/staking.jpg" width="1280" height="800" alt="Staking reward calculator" loading="lazy"></div>
+      <div class="cap"><h3>Staking calculator</h3><span data-i="cStake">Демо · интерактивный калькулятор</span></div>
+    </a>
+    <a class="tile shot s4" href="sites/pawsbury.html">
+      <div class="img"><img src="images/pawsbury.jpg" width="1280" height="800" alt="Pawsbury: pet shop landing page" loading="lazy"></div>
+      <div class="cap"><h3>Pawsbury</h3><span data-i="cPaws">Демо · зоомагазин</span></div>
+    </a>
+    <a class="tile shot s4" href="sites/clairevigne.html">
+      <div class="img"><img src="images/clairevigne.jpg" width="1280" height="800" alt="Clairevigne: wine shop landing page" loading="lazy"></div>
+      <div class="cap"><h3>Clairevigne</h3><span data-i="cWine">Демо · винная лавка</span></div>
+    </a>
+    <a class="tile shot s4" href="sites/ironhook-butchery.html">
+      <div class="img"><img src="images/ironhook.jpg" width="1280" height="800" alt="Ironhook Butchery landing page" loading="lazy"></div>
+      <div class="cap"><h3>Ironhook Butchery</h3><span data-i="cMeat">Демо · мясная лавка</span></div>
+    </a>
+    <a class="tile shot s4" href="sites/marginalia-books.html">
+      <div class="img"><img src="images/marginalia.jpg" width="1280" height="800" alt="Marginalia Books landing page" loading="lazy"></div>
+      <div class="cap"><h3>Marginalia Books</h3><span data-i="cBooks">Демо · книжный магазин</span></div>
+    </a>
+    <div class="tile s4" id="bfpTile">
+      <div class="shot">
+        <div class="img" id="bfpImgBox"><img id="bfpImg" src="images/bfp.jpg" width="1280" height="800" alt="Website prototype for a sports federation" loading="lazy"></div>
+        <div class="ph" id="bfpPh" hidden data-i="bfpPh">Скриншот будет добавлен</div>
+        <div class="cap"><h3 data-i="bfpT">Сайт спортивной федерации</h3><span data-i="bfpS">Прототип · в работе</span></div>
+      </div>
+    </div>
+
+    <h2 class="sec" data-i="secApps">Дизайн приложений</h2>
+
+    <section class="tile s3">
+      <div class="appshot"><img src="images/app-exch.jpg" width="320" height="660" alt="Exchange app screen design"></div>
+      <div class="cap"><h3 data-i="a1T">Обменник</h3><span data-i="a1S">Визуал экрана</span></div>
+    </section>
+    <section class="tile s3">
+      <div class="appshot"><img src="images/app-shop.jpg" width="320" height="660" alt="Shop app screen design"></div>
+      <div class="cap"><h3 data-i="a2T">Магазин</h3><span data-i="a2S">Визуал экрана</span></div>
+    </section>
+    <section class="tile s3">
+      <div class="appshot"><img src="images/app-cafe.jpg" width="320" height="660" alt="Cafe loyalty app screen design"></div>
+      <div class="cap"><h3 data-i="a3T">Кафе</h3><span data-i="a3S">Визуал экрана</span></div>
+    </section>
+    <section class="tile s3">
+      <div class="appshot"><img src="images/app-trk.jpg" width="320" height="660" alt="Crypto tracker app screen design"></div>
+      <div class="cap"><h3 data-i="a4T">Крипто-трекер</h3><span data-i="a4S">Визуал экрана</span></div>
+    </section>
+    <p class="note s12" data-i="appNote">Только визуальный дизайн экранов (Android/iOS), не рабочее приложение.</p>
+
+    <h2 class="sec" data-i="secBots">Telegram-боты</h2>
+
+    <section class="tile bot s4">
+      <div class="phone" aria-label="Demo dialogue of the crypto price bot">
+        <div class="top">Crypto price bot</div>
+        <div class="m u">/price btc</div>
+        <div class="m b">BTC/USD: 67,250.00<br>🟢 24h: +1.80%</div>
+        <div class="m u">/convert 0.5 eth usd</div>
+        <div class="m b">0.5 ETH ≈ 1,725.00 USD</div>
+        <div class="m u">/top</div>
+        <div class="m b">🏆 Top 10 by market cap (USD)<br>1. BTC 67,250.00 (+1.8%)<br>2. ETH 3,450.00 (+0.9%)</div>
+      </div>
+      <div class="cap"><h3 data-i="b1T">Бот курсов криптовалют</h3><span data-i="b1S">Цена, топ-10 и конвертер</span></div>
+      <p class="note" data-i="note">Демо-диалог. Цены в примере условные.</p>
+    </section>
+
+    <section class="tile bot s4">
+      <div class="phone" aria-label="Demo dialogue of the request bot">
+        <div class="top">Nord Studio bot</div>
+        <div class="m b">Welcome to Nord Studio! Choose an option:</div>
+        <div class="kb"><i>Services</i><i>Prices</i><i>FAQ</i><i>Contacts</i><i class="wide">✍️ Leave a request</i></div>
+        <div class="m u">✍️ Leave a request</div>
+        <div class="m b">What's your name?</div>
+        <div class="m u">Anna</div>
+        <div class="m b">Phone, Telegram @username or email so we can reach you:</div>
+        <div class="m b">✅ Thanks! We'll get back to you soon.</div>
+      </div>
+      <div class="cap"><h3 data-i="b2T">Бот для заявок</h3><span data-i="b2S">Меню, FAQ и форма, заявка уходит владельцу</span></div>
+      <p class="note" data-i="note">Демо-диалог. Цены в примере условные.</p>
+    </section>
+
+    <section class="tile s4">
+      <div class="label" data-i="canT">Что умеют мои боты</div>
+      <ul class="list">
+        <li data-i="f1">Меню с кнопками и ответы на частые вопросы</li>
+        <li data-i="f2">Сбор заявок и пересылка владельцу в Telegram</li>
+        <li data-i="f3">Данные из внешних сервисов: курсы, расписания, статусы</li>
+        <li data-i="f4">Своя логика под ваш бизнес</li>
+      </ul>
+      <p class="note">Python · python-telegram-bot</p>
+    </section>
+
+    <h2 class="sec" data-i="secCopy">Тексты и переводы</h2>
+
+    <section class="tile s7">
+      <div class="label" data-i="trT">Перевод EN → RU</div>
+      <div class="pair">
+        <p class="q"><small>EN</small>Security reminder: our team will never ask for your recovery phrase, private keys or passwords.</p>
+        <p class="q"><small>RU</small>Напоминание о безопасности: наша команда никогда не запрашивает у вас резервную фразу, приватные ключи или пароли.</p>
+      </div>
+    </section>
+    <section class="tile s5">
+      <div class="label" data-i="txT">Тред для X (EN)</div>
+      <p class="q"><small>1/</small>Not your keys, not your coins. You've heard it a hundred times, but what does it actually mean?</p>
+      <p class="q" style="margin-top:10px"><small>4/</small>The trade-off is responsibility. Lose your recovery phrase and there is no "forgot password" button. That's the price of real ownership.</p>
+    </section>
+  </main>
+
+  <footer data-i="foot">Бренды в примерах вымышлены. Работы показаны как демо и концепты.</footer>
+</div>
+
+<script>
+(function(){
+  // Edit your contact here: only the part after t.me/
+  var TELEGRAM = 'Andri4_P';
+
+  var T = {
+    ru:{chip:'Принимаю заказы',h1:'Сайты, боты и тексты для крипто-проектов и малого бизнеса',lead:'Делаю быстро и по делу: от лендинга до Telegram-бота. Ниже примеры работ. Детали и цену обсудим в личных сообщениях.',cta:'Написать в Telegram',contact:'Связь',pay:'Оплата: USDT, USDC или по договорённости.',s1:'Бриф',s2:'Цена',s3:'Предоплата',s4:'Результат и правки',secWork:'Сайты',secBots:'Telegram-боты',secCopy:'Тексты и переводы',cVault:'Концепт · лендинг крипто-трекера',cNova:'Концепт · лендинг кошелька',cNord:'Демо · сайт-визитка кофейни',cStake:'Демо · интерактивный калькулятор',cPaws:'Демо · зоомагазин',cWine:'Демо · винная лавка',cMeat:'Демо · мясная лавка',cBooks:'Демо · книжный магазин',secApps:'Дизайн приложений',a1T:'Обменник',a1S:'Визуал экрана',a2T:'Магазин',a2S:'Визуал экрана',a3T:'Кафе',a3S:'Визуал экрана',a4T:'Крипто-трекер',a4S:'Визуал экрана',appNote:'Только визуальный дизайн экранов (Android/iOS), не рабочее приложение.',bfpT:'Сайт спортивной федерации',bfpS:'Прототип · в работе',bfpPh:'Скриншот будет добавлен',b1T:'Бот курсов криптовалют',b1S:'Цена, топ-10 и конвертер',b2T:'Бот для заявок',b2S:'Меню, FAQ и форма, заявка уходит владельцу',note:'Демо-диалог. Цены в примере условные.',canT:'Что умеют мои боты',f1:'Меню с кнопками и ответы на частые вопросы',f2:'Сбор заявок и пересылка владельцу в Telegram',f3:'Данные из внешних сервисов: курсы, расписания, статусы',f4:'Своя логика под ваш бизнес',trT:'Перевод EN → RU',txT:'Тред для X (EN)',foot:'Бренды в примерах вымышлены. Работы показаны как демо и концепты.'},
+    en:{chip:'Open for projects',h1:'Websites, bots and copy for crypto projects and small businesses',lead:'Fast and to the point, from a landing page to a Telegram bot. Sample projects are below. We can discuss details and price in a message.',cta:'Message on Telegram',contact:'Contact',pay:'Payment: USDT, USDC or by agreement.',s1:'Brief',s2:'Price',s3:'Prepayment',s4:'Delivery and edits',secWork:'Websites',secBots:'Telegram bots',secCopy:'Copy and translation',cVault:'Concept · crypto tracker landing page',cNova:'Concept · wallet landing page',cNord:'Demo · coffee shop business-card site',cStake:'Demo · interactive calculator',cPaws:'Demo · pet shop',cWine:'Demo · wine shop',cMeat:'Demo · butcher shop',cBooks:'Demo · bookshop',secApps:'App design',a1T:'Exchange',a1S:'Screen visual',a2T:'Shop',a2S:'Screen visual',a3T:'Cafe',a3S:'Screen visual',a4T:'Crypto tracker',a4S:'Screen visual',appNote:'Visual screen design only (Android/iOS), not a working app.',bfpT:'Sports federation website',bfpS:'Prototype · in progress',bfpPh:'Screenshot coming soon',b1T:'Crypto price bot',b1S:'Prices, top 10 and converter',b2T:'Request bot',b2S:'Menu, FAQ and a form that forwards requests to the owner',note:'Demo dialogue. Prices in the example are made up.',canT:'What my bots can do',f1:'Button menus and answers to common questions',f2:'Collecting requests and forwarding them to the owner in Telegram',f3:'Data from outside services: prices, schedules, statuses',f4:'Custom logic for your business',trT:'Translation EN → RU',txT:'X thread (EN)',foot:'Brands in the examples are fictional. Projects are shown as demos and concepts.'}
+  };
+
+  function setLang(l){
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i]').forEach(function(el){
+      var v=T[l][el.getAttribute('data-i')]; if(v!==undefined) el.textContent=v;
+    });
+    document.querySelectorAll('.lang button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang')===l ? 'true':'false');
+    });
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'))});
+  });
+
+  var url='https://t.me/'+TELEGRAM;
+  document.getElementById('cta').href=url;
+  var h=document.getElementById('handle'); h.href=url; h.textContent='@'+TELEGRAM;
+
+  // federation tile: show a placeholder until images/bfp.jpg exists
+  var img=document.getElementById('bfpImg');
+  img.addEventListener('error',function(){
+    document.getElementById('bfpImgBox').hidden=true;
+    document.getElementById('bfpPh').hidden=false;
+  });
+
+  document.querySelectorAll('.tile').forEach(function(t){
+    t.addEventListener('pointermove',function(e){
+      var r=t.getBoundingClientRect();
+      t.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      t.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  });
+
+  var saved=null; try{saved=localStorage.getItem('lang')}catch(e){}
+  if(saved==='en') setLang('en');
+})();
+</script>
+</body>
+</html>

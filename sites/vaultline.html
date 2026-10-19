@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Vaultline: concept landing page for a fictional crypto portfolio tracker. Design sample with example data.">
+<title>Vaultline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Sora:wght@600;700&display=swap">
+<style>
+/* Layout: 12-column bento grid of glass cards; one hero card, one portfolio card, small utility cards below. */
+:root{
+  color-scheme:dark;
+  --bg:#0b0d14;
+  --card:rgba(20,24,38,.66);
+  --line:rgba(255,255,255,.08);
+  --fg:#e9ecf6;
+  --muted:#8f97b0;
+  --accent:#8b9cff;
+  --up:#4ade80;
+  --down:#f87171;
+  --display:'Sora',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 var(--body);
+  background-image:radial-gradient(900px 500px at 15% -10%,rgba(139,156,255,.14),transparent 60%);
+  padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.page{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0 22px}
+.logo{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:.02em}
+.logo i{font-style:normal;color:var(--accent)}
+.pill{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.card{
+  grid-column:span 12;position:relative;overflow:hidden;min-width:0;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(139,156,255,.14),transparent 60%);
+}
+.card:hover::after{opacity:1}
+.card>*{position:relative;z-index:1}
+.label{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+
+.hero{display:flex;flex-direction:column;justify-content:flex-end;gap:18px;min-height:340px}
+.hero h1{font-size:clamp(2rem,5.5vw,3.3rem);font-weight:700}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);max-width:46ch;margin:0}
+.cta{align-self:flex-start;background:var(--accent);color:#0b0d14;font-weight:500;border:0;border-radius:12px;padding:12px 22px;font:500 .95rem var(--body);cursor:pointer}
+.cta:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.total{font-size:clamp(1.9rem,4vw,2.4rem);font-weight:500;margin:4px 0}
+.chg{color:var(--up);font-size:.9rem}
+.spark{display:block;width:100%;height:84px;margin-top:14px}
+
+.rows{display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
+.sym{font-family:var(--mono);font-weight:500}
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.07);margin-top:6px;overflow:hidden}
+.bar b{display:block;height:100%;border-radius:99px;background:var(--accent)}
+.val{text-align:right}.val small{display:block;color:var(--muted)}
+
+.alert{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:.92rem}
+.alert:first-of-type{border-top:0}
+.alert .num{color:var(--muted)}
+.dn{color:var(--down)}.upc{color:var(--up)}
+
+.card h3{font-size:1.1rem;margin-bottom:8px}
+.card p.t{color:var(--muted);margin:0}
+
+.faq details{border-top:1px solid var(--line);padding:14px 0}
+.faq details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:500}
+details p{margin:8px 0 0;color:var(--muted)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding-top:26px}
+
+@media(min-width:760px){
+  .hero{grid-column:span 8;grid-row:span 2}
+  .portfolio{grid-column:span 4;grid-row:span 2}
+  .holdings{grid-column:span 7}
+  .alerts{grid-column:span 5}
+  .third{grid-column:span 4}
+}
+@media(prefers-reduced-motion:reduce){.card::after{transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav>
+    <div class="logo">Vault<i>line</i></div>
+    <span class="pill">Concept · sample data</span>
+  </nav>
+
+  <main class="bento">
+    <section class="card hero">
+      <h1>Every wallet.<br><span>One calm screen.</span></h1>
+      <p>Vaultline tracks your holdings across chains, watches the prices you care about and shows what each transaction really cost you.</p>
+      <button class="cta" type="button">Join the waitlist</button>
+    </section>
+
+    <section class="card portfolio">
+      <div class="label">Portfolio value</div>
+      <div class="total num">$24,380.00</div>
+      <div class="chg num">▲ 2.4% in 24h</div>
+      <svg class="spark" id="spark" viewBox="0 0 240 84" preserveAspectRatio="none" aria-label="Sample 30-day value trend" role="img"></svg>
+    </section>
+
+    <section class="card holdings">
+      <div class="label">Holdings</div>
+      <div class="rows">
+        <div class="row"><span class="sym">BTC</span><div><div>Bitcoin</div><div class="bar"><b style="width:46%"></b></div></div><div class="val num">$11,200<small>46%</small></div></div>
+        <div class="row"><span class="sym">ETH</span><div><div>Ethereum</div><div class="bar"><b style="width:25%"></b></div></div><div class="val num">$6,100<small>25%</small></div></div>
+        <div class="row"><span class="sym">USDC</span><div><div>USD Coin</div><div class="bar"><b style="width:16%"></b></div></div><div class="val num">$4,000<small>16%</small></div></div>
+        <div class="row"><span class="sym">SOL</span><div><div>Solana</div><div class="bar"><b style="width:13%"></b></div></div><div class="val num">$3,080<small>13%</small></div></div>
+      </div>
+    </section>
+
+    <section class="card alerts">
+      <div class="label">Price alerts</div>
+      <div class="alert"><span>ETH drops below</span><span class="num dn">$2,400</span></div>
+      <div class="alert"><span>BTC rises above</span><span class="num upc">$75,000</span></div>
+      <div class="alert"><span>Gas under</span><span class="num">12 gwei</span></div>
+    </section>
+
+    <section class="card third">
+      <h3>Read-only by design</h3>
+      <p class="t">Add a wallet by its public address. Vaultline never asks for a seed phrase or a signature.</p>
+    </section>
+    <section class="card third">
+      <h3>Fees in plain numbers</h3>
+      <p class="t">See what every swap and transfer cost in network fees, in your own currency.</p>
+    </section>
+    <section class="card third">
+      <h3>Several chains, one list</h3>
+      <p class="t">Ethereum, Solana, Bitcoin and popular L2 networks sit together in one portfolio.</p>
+    </section>
+
+    <section class="card faq">
+      <div class="label">Questions</div>
+      <details><summary>Can Vaultline move my funds?</summary><p>No. It reads public blockchain data only and has no permission to send or sign anything.</p></details>
+      <details><summary>Which assets are supported?</summary><p>Major coins, stablecoins and the most common tokens on the supported networks.</p></details>
+      <details><summary>Is this a real product?</summary><p>No. Vaultline is a fictional concept made as a design sample, and every figure on this page is example data.</p></details>
+    </section>
+  </main>
+
+  <footer>Design concept for portfolio use. Not financial advice.</footer>
+</div>
+
+<script>
+(function(){
+  // sample 30-day trend, drawn to scale from these values
+  var d=[21.4,21.1,21.6,22.0,21.8,22.3,22.1,22.7,22.4,22.9,23.3,23.0,22.6,23.1,23.5,23.2,23.8,24.1,23.7,23.4,23.9,24.3,24.0,23.6,24.2,24.5,24.1,23.8,24.2,24.38];
+  var w=240,h=84,p=6,min=Math.min.apply(null,d),max=Math.max.apply(null,d);
+  var pts=d.map(function(v,i){return [i/(d.length-1)*w, h-p-(v-min)/(max-min)*(h-2*p)];});
+  var line=pts.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ');
+  var last=pts[pts.length-1];
+  document.getElementById('spark').innerHTML=
+    '<defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b9cff" stop-opacity=".35"/><stop offset="1" stop-color="#8b9cff" stop-opacity="0"/></linearGradient></defs>'+
+    '<polygon points="0,'+h+' '+line+' '+w+','+h+'" fill="url(#sg)"/>'+
+    '<polyline points="'+line+'" fill="none" stroke="#8b9cff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>'+
+    '<circle cx="'+(last[0]-3).toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="3.5" fill="#8b9cff"/>';
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove',function(e){
+      var r=c.getBoundingClientRect();
+      c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      c.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  });
+})();
+</script>
+</body>
+</html>

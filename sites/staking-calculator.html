@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staking Reward Calculator (sample tool)</title>
+<style>
+:root{--bg:#0f1220;--card:#171b2e;--line:#272d47;--text:#eaeefb;--muted:#8f99b8;--a:#7c9cff}
+*{box-sizing:border-box;margin:0}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;place-items:center;padding:20px}
+.box{width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+h1{font-size:1.4rem;margin-bottom:4px}.sub{color:var(--muted);font-size:.9rem;margin-bottom:22px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:14px 0 6px}
+input,select{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:1rem}
+input:focus,select:focus{outline:2px solid var(--a);border-color:transparent}
+.res{margin-top:24px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px}
+.row{display:flex;justify-content:space-between;padding:6px 0;font-size:.95rem}.row span{color:var(--muted)}
+.big{font-size:1.8rem;font-weight:800;color:var(--a);text-align:center;margin-bottom:8px}
+.note{margin-top:16px;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Staking calculator</h1>
+  <div class="sub">Estimate rewards with optional compounding.</div>
+
+  <label for="amt">Amount staked</label>
+  <input id="amt" type="number" min="0" step="any" value="1000">
+
+  <label for="apy">Annual rate (%)</label>
+  <input id="apy" type="number" min="0" step="any" value="5">
+
+  <label for="dur">Duration (months)</label>
+  <input id="dur" type="number" min="1" step="1" value="12">
+
+  <label for="cmp">Compounding</label>
+  <select id="cmp">
+    <option value="0">None (simple)</option>
+    <option value="12" selected>Monthly</option>
+    <option value="365">Daily</option>
+  </select>
+
+  <div class="res">
+    <div class="big" id="total">0</div>
+    <div class="row"><span>Rewards earned</span><b id="gain">0</b></div>
+    <div class="row"><span>Final balance</span><b id="final">0</b></div>
+  </div>
+  <div class="note">Illustrative estimate only. Real rewards vary with network conditions and fees. Not financial advice.</div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => n.toLocaleString('en-US',{maximumFractionDigits:2});
+function calc(){
+  const p = parseFloat($('amt').value)||0;
+  const r = (parseFloat($('apy').value)||0)/100;
+  const years = Math.max(parseFloat($('dur').value)||0,0)/12;
+  const n = parseInt($('cmp').value,10);
+  const final = n===0 ? p*(1+r*years) : p*Math.pow(1+r/n,n*years);
+  const gain = final-p;
+  $('total').textContent = '+' + fmt(gain);
+  $('gain').textContent = fmt(gain);
+  $('final').textContent = fmt(final);
+}
+['amt','apy','dur','cmp'].forEach(id=>$(id).addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>

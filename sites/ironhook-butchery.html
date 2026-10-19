@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ironhook Butchery (concept)</title>
+<style>
+:root{--bg:#1b1511;--paper:#e8dcc8;--ink:#1b1511;--accent:#b5452b;--line:#3a2f27;--muted:#8a7d6e}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Courier New',monospace;background:var(--bg);color:var(--paper);line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:3px double var(--paper)}
+.logo{font-size:1.3rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.logo span{color:var(--accent)}
+nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-size:.82rem;text-transform:uppercase;letter-spacing:1px}
+.hero{padding:50px 0 40px;text-align:center}
+.stamp{display:inline-block;border:2px solid var(--accent);color:var(--accent);padding:5px 14px;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;transform:rotate(-2deg)}
+.hero h1{font-size:clamp(1.9rem,5vw,3rem);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.hero p{color:var(--muted);max-width:480px;margin:0 auto 26px}
+.btn{display:inline-block;background:var(--accent);color:var(--paper);padding:13px 28px;text-decoration:none;text-transform:uppercase;font-size:.85rem;letter-spacing:1px}
+.board{background:var(--paper);color:var(--ink);border-radius:4px;padding:30px 24px;margin:20px 0 50px}
+.board h2{text-align:center;text-transform:uppercase;letter-spacing:3px;font-size:1rem;margin-bottom:22px;color:var(--accent)}
+.cuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.cut{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:10px}
+.cut b{display:block}
+.cut small{color:var(--muted);text-transform:uppercase;font-size:.72rem;letter-spacing:.5px}
+.cut .p{font-weight:700;color:var(--accent)}
+footer{text-align:center;color:var(--muted);font-size:.75rem;padding:20px 0 36px;text-transform:uppercase;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">Iron<span>hook</span></div>
+    <nav><a href="#board">Прилавок</a><a href="#footer">Контакты</a></nav>
+  </header>
+
+  <section class="hero">
+    <span class="stamp">Семейная лавка</span>
+    <h1>Мясо, выдержанное<br>по старым правилам</h1>
+    <p>Фермерское мясо, сухая выдержка, разделка под заказ. Работаем с местными хозяйствами с 2009 года.</p>
+    <a class="btn" href="#board">К прилавку</a>
+  </section>
+
+  <section class="board" id="board">
+    <h2>Прилавок сегодня</h2>
+    <div class="cuts">
+      <div class="cut"><div><b>Рибай, выдержка 28 дней</b><small>Говядина</small></div><span class="p">34 €/кг</span></div>
+      <div class="cut"><div><b>Лопатка на гриль</b><small>Свинина</small></div><span class="p">14 €/кг</span></div>
+      <div class="cut"><div><b>Бедро, фермерское</b><small>Курица</small></div><span class="p">9 €/кг</span></div>
+      <div class="cut"><div><b>Колбаски домашние</b><small>Говядина/свинина</small></div><span class="p">12 €/кг</span></div>
+    </div>
+  </section>
+
+  <footer id="footer">Демо-сайт для портфолио. Бренд вымышленный.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marginalia Books (concept)</title>
+<style>
+:root{--bg:#f6f3ec;--ink:#28241f;--accent:#2e5339;--line:#ddd5c2;--muted:#6b6459;--card:#fff}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Palatino Linotype','Book Antiqua',Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+.logo{font-size:1.4rem;font-style:italic}
+nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-family:system-ui,sans-serif;font-size:.85rem}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:50px 0}
+.hero h1{font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.3;margin-bottom:16px}
+.hero p{color:var(--muted);margin-bottom:24px}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 26px;text-decoration:none;border-radius:2px;font-family:system-ui,sans-serif;font-size:.9rem}
+.shelf{aspect-ratio:1/1;background:repeating-linear-gradient(90deg,var(--accent) 0 60px,#1e3a27 60px 62px);border-radius:4px}
+@media(max-width:720px){.hero{grid-template-columns:1fr}}
+h2{font-style:italic;font-size:1.5rem;margin:40px 0 20px;text-align:center}
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;padding-bottom:56px}
+.b{background:var(--card);border:1px solid var(--line);padding:18px;text-align:center}
+.cover{height:110px;border-radius:2px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem}
+.b b{display:block;font-size:.95rem}
+.b span{display:block;color:var(--muted);font-family:system-ui,sans-serif;font-size:.78rem;margin-top:4px}
+.b .price{font-family:system-ui,sans-serif;color:var(--accent);font-weight:700;margin-top:8px;display:block}
+footer{text-align:center;color:var(--muted);font-family:system-ui,sans-serif;font-size:.8rem;padding:24px 0 36px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">Marginalia</div>
+    <nav><a href="#shelf">Полка</a><a href="#footer">Контакты</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Книжный магазин для тех, кто читает медленно</h1>
+      <p>Независимое издательство, редкие переиздания и подборки от наших продавцов. Приходите за советом, а не только за книгой.</p>
+      <a class="btn" href="#shelf">На полку</a>
+    </div>
+    <div class="shelf"></div>
+  </section>
+
+  <h2 id="shelf">Подборка недели</h2>
+  <div class="books">
+    <div class="b"><div class="cover" style="background:#7a3b3b">📘</div><b>Тихий океан</b><span>Роман</span><span class="price">16 €</span></div>
+    <div class="b"><div class="cover" style="background:#355a6b">📗</div><b>Сад камней</b><span>Эссе</span><span class="price">14 €</span></div>
+    <div class="b"><div class="cover" style="background:#6b4f2e">📙</div><b>Карта ночи</b><span>Поэзия</span><span class="price">11 €</span></div>
+    <div class="b"><div class="cover" style="background:#3f5e3f">📕</div><b>Второй этаж</b><span>Повесть</span><span class="price">13 €</span></div>
+  </div>
+
+  <footer id="footer">Демо-сайт для портфолио. Бренд вымышленный.</footer>
+</div>
+</body>
+</html>
